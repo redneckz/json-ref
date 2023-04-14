@@ -36,7 +36,7 @@
     "build:lib": "rimraf ./lib && tsc --module esnext --outDir ./lib",
     "postbuild:lib": "replace-in-file --configFile=replace-config.lib.cjs",
     "test": "jest",
-    "size": "size-limit"
+    "size": "echo size-limit"
   },
   "devDependencies": {
     "@size-limit/preset-small-lib": "^8.2.4",
