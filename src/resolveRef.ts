@@ -3,19 +3,15 @@ import type { URIResolver } from './URIResolver';
 import { resolveJPointer } from './resolveJPointer';
 
 export const resolveRef = async (json: JSONNode, resolver: URIResolver): Promise<JSONNode> => {
-  if (!json) {
-    return json;
-  }
-
   if (isJSONRef(json)) {
     return mapJSONRef(json, resolver);
   } else if (isJSONRecord(json)) {
     return mapJSONRecord(json, resolver);
   } else if (isJSONArray(json)) {
     return mapJSONArray(json, resolver);
+  } else {
+    return json;
   }
-
-  return json;
 };
 
 const mapJSONArray = async (list: JSONNode[], resolver: URIResolver): Promise<JSONNode[]> =>
@@ -28,7 +24,7 @@ const mapJSONRecord = async (record: JSONRecord, resolver: URIResolver): Promise
         [key]: await resolveRef(value, resolver)
       }))
     )
-  ).reduce(Object.assign, {});
+  ).reduce((acc, _) => Object.assign(acc, _), {});
 
 const mapJSONRef = async ({ $ref, ...rest }: JSONRef, resolver: URIResolver): Promise<JSONNode> =>
   $ref ? resolveJPointer(await resolver($ref), $ref) : rest;

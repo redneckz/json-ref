@@ -9,7 +9,7 @@
     "declaration": true,
     "rootDir": "./src",
     "outDir": "./dist",
-    "types": ["node"]
+    "types": ["node", "jest"]
   },
   "include": ["./src/**/*.js", "./src/**/*.ts"],
   "exclude": ["node_modules", "./src/**/mock*", "./src/**/*.spec.*"]
