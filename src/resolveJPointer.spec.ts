@@ -10,7 +10,7 @@ describe('resolveJPointer', () => {
     expect(resolveJPointer(json, 'http://plugh.ru')).toEqual(json);
   });
 
-  it('should return JSON list item addressed by URI fragment with index', () => {
+  it('should return JSON list item addressed by URI fragment with indices', () => {
     expect(resolveJPointer({ foo: [1, [2], 3] }, 'http://plugh.ru#/foo/1/0')).toBe(2);
   });
 

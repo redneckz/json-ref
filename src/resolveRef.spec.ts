@@ -1,7 +1,7 @@
 import { resolveRef } from './resolveRef';
 
 describe('resolveRef', () => {
-  it('should inline JSON addressed by URI in place of "$ref" declared inside object', async () => {
+  it('should substitute JSON addressed by URI in place of "$ref" declared inside object', async () => {
     const constResolver = () => ({
       some: { remote: 'json' }
     });
@@ -24,7 +24,7 @@ describe('resolveRef', () => {
     });
   });
 
-  it('should inline json addressed by URI in place of "$ref" declared inside list', async () => {
+  it('should substitute JSON addressed by URI in place of "$ref" declared inside list', async () => {
     const constResolver = () => ({
       some: { remote: 'json' }
     });
@@ -47,7 +47,7 @@ describe('resolveRef', () => {
     });
   });
 
-  it('should inline json addressed by URI in place of "$ref" with regard to URI fragment', async () => {
+  it('should substitute JSON addressed by URI in place of "$ref" with regard to URI fragment', async () => {
     const constResolver = () => ({
       some: { remote: 'json' }
     });
@@ -68,5 +68,24 @@ describe('resolveRef', () => {
         baz: [123]
       }
     });
+  });
+
+  it('should "ask" URIResolver to resolve URI for each "$ref"', async () => {
+    expect.assertions(2);
+
+    const resolver = jest.fn();
+
+    const result = await resolveRef(
+      {
+        foo: {
+          bar: { $ref: 'http://some-remote.json#/first' },
+          baz: [123, { $ref: 'http://some-remote.json#/second' }, 456]
+        }
+      },
+      resolver
+    );
+
+    expect(resolver).toBeCalledWith('http://some-remote.json#/first');
+    expect(resolver).toBeCalledWith('http://some-remote.json#/second');
   });
 });
