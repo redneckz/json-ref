@@ -27,4 +27,4 @@ const mapJSONRecord = async (record: JSONRecord, resolver: URIResolver): Promise
   ).reduce((acc, _) => Object.assign(acc, _), {});
 
 const mapJSONRef = async ({ $ref, ...rest }: JSONRef, resolver: URIResolver): Promise<JSONNode> =>
-  $ref ? resolveJPointer(await resolver($ref), $ref) : rest;
+  resolveRef($ref ? resolveJPointer(await resolver($ref), $ref) : rest, resolver);

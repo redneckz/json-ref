@@ -5,7 +5,7 @@ export const resolveJPointer = (json: JSONNode, uri: string): JSONNode =>
   parseJPointer(uri).reduce(selectNodeByKey, json);
 
 const selectNodeByKey = (json: JSONNode, key: string): JSONNode => {
-  if (!key) {
+  if (!json || !key) {
     return json;
   }
 
