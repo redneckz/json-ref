@@ -1,4 +1,4 @@
-import { JSONNode, JSONRecord, JSONRef, isJSONArray, isJSONRecord, isJSONRef } from './JSONNode';
+import { type JSONNode, type JSONRecord, type JSONRef, isJSONArray, isJSONRecord, isJSONRef } from './JSONNode';
 import type { URIResolver } from './URIResolver';
 import { resolveJPointer } from './resolveJPointer';
 
