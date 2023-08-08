@@ -6,7 +6,5 @@ export { collectRef } from './collectRef';
 export { resolveJPointer } from './resolveJPointer';
 
 export type { URIResolver } from './URIResolver';
-export { fetchResolver } from './fetchResolver';
-export { fileResolver } from './fileResolver';
 
 export * from './JSONNode';
