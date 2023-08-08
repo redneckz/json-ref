@@ -1,6 +1,9 @@
-import type { URIResolver } from './URIResolver';
+import * as fs from 'fs';
 import * as path from 'path';
-import { readFile } from 'fs/promises';
+import { promisify } from 'util';
+import type { URIResolver } from './URIResolver';
+
+const readFile = promisify(fs.readFile);
 
 export const fileResolver =
   (basePath: string): URIResolver =>
