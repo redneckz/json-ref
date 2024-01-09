@@ -1,4 +1,4 @@
-import { JSONNode, isJSONArray, isJSONRecord } from './JSONNode';
+import { isJSONArray, isJSONRecord, type JSONNode } from '@redneckz/json-op';
 import { parseJPointer } from './parseJPointer';
 
 export const resolveJPointer = (json: JSONNode, uri: string): JSONNode =>

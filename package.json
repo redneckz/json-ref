@@ -1,6 +1,6 @@
 {
   "name": "@redneckz/json-ref",
-  "version": "0.0.7",
+  "version": "0.0.8",
   "license": "MIT",
   "author": {
     "name": "redneckz",
@@ -44,6 +44,9 @@
     "postbuild:lib": "replace-in-file --configFile=replace-config.lib.cjs",
     "test": "jest",
     "size": "echo size-limit"
+  },
+  "dependencies": {
+    "@redneckz/json-op": "^0.0.5"
   },
   "devDependencies": {
     "@size-limit/preset-small-lib": "^8.2.4",

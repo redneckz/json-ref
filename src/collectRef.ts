@@ -1,8 +1,4 @@
-import { type JSONNode } from './JSONNode';
-import { visitRef } from './visitRef';
+import { type JSONNode } from '@redneckz/json-op';
+import { refEntries } from './refEntries';
 
-export const collectRef = (json: JSONNode): string[] => {
-  const refs: string[] = [];
-  visitRef(json, _ => refs.push(_));
-  return refs;
-};
+export const collectRef = (json: JSONNode): string[] => refEntries(json).map(([, _]) => _);
