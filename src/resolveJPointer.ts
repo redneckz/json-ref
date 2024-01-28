@@ -1,19 +1,11 @@
-import { isJSONArray, isJSONRecord, type JSONNode } from '@redneckz/json-op';
+import { fp, isJSONArray, isJSONRecord, type JSONArray, type JSONNode, type JSONRecord } from '@redneckz/json-op';
 import { parseJPointer } from './parseJPointer';
 
 export const resolveJPointer = (json: JSONNode, uri: string): JSONNode =>
   parseJPointer(uri).reduce(selectNodeByKey, json);
 
-const selectNodeByKey = (json: JSONNode, key: string): JSONNode => {
-  if (!json || !key) {
-    return json;
-  }
-
-  if (isJSONRecord(json)) {
-    return json[key];
-  } else if (isJSONArray(json)) {
-    return json[parseInt(key, 10)];
-  } else {
-    return json;
-  }
-};
+const selectNodeByKey = fp.table<[json: JSONNode, key: string], JSONNode>(
+  [isJSONArray, (json, key) => (json as JSONArray)[parseInt(key, 10)]],
+  [isJSONRecord, (json, key) => (json as JSONRecord)[key]],
+  [fp.trueF, fp.identity]
+);

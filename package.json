@@ -1,6 +1,6 @@
 {
   "name": "@redneckz/json-ref",
-  "version": "0.0.8",
+  "version": "0.0.10",
   "license": "MIT",
   "author": {
     "name": "redneckz",
@@ -46,7 +46,7 @@
     "size": "echo size-limit"
   },
   "dependencies": {
-    "@redneckz/json-op": "^0.0.5"
+    "@redneckz/json-op": "^0.0.7"
   },
   "devDependencies": {
     "@size-limit/preset-small-lib": "^8.2.4",

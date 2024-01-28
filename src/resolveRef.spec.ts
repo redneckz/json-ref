@@ -65,7 +65,9 @@ describe('resolveRef', () => {
 
   it('should recursively process "$ref" fields of fragments returned by URIresolver', async () => {
     const constResolver = async (uri: string) =>
-      uri === '#some/remote/json' ? { some: { remote: { json: { $ref: '#/foo' } } } } : 'foo';
+      uri === '#some/remote/json'
+        ? await resolveRef({ some: { remote: { json: { $ref: '#/foo' } } } }, constResolver)
+        : 'foo';
 
     const result = await resolveRef(
       {

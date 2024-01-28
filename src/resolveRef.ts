@@ -6,9 +6,6 @@ import { resolveJPointer } from './resolveJPointer';
 export const resolveRef = async (json: JSONNode, resolver: URIResolver): Promise<JSONNode> =>
   async.map(async ([path, node]) =>
     isJSONRefPath(path)
-      ? [
-          fp.init(path) as JSONPath.JSONPath,
-          await resolveRef(resolveJPointer(await resolver(node as string), node as string), resolver)
-        ]
+      ? [fp.init(path) as JSONPath.JSONPath, resolveJPointer(await resolver(node as string), node as string)]
       : [path, node]
   )(json);
