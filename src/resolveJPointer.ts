@@ -7,5 +7,5 @@ export const resolveJPointer = (json: JSONNode, uri: string): JSONNode =>
 const selectNodeByKey = fp.table<[json: JSONNode, key: string], JSONNode>(
   [isJSONArray, (json, key) => (json as JSONArray)[parseInt(key, 10)]],
   [isJSONRecord, (json, key) => (json as JSONRecord)[key]],
-  [fp.trueF, fp.identity]
+  [fp.Predicate.trueF, fp.identity]
 );
